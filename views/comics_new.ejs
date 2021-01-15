@@ -1,0 +1,79 @@
+ <%- include("partials/header") %>
+<div class="container">
+	<h1>Add New Comic</h1>
+<form action="/comic" method="POST">
+  <div class="mb-3">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" name="title" autofocus placeholder="eg.Watchmen">
+  </div>
+  <div class="mb-3">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" name="description">
+  </div>
+	
+	<div class="mb-3">
+    <label for="author">Author</label>
+    <input type="text" class="form-control" name="author">
+  </div>
+	<div class="mb-3">
+    <label for="publisher">Publisher</label>
+    <input type="text" class="form-control" name="publisher">
+  </div>
+	<div class="mb-3">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" name="date">
+  </div>
+	<div class="mb-3">
+    <label for="series">Series</label>
+    <input type="text" class="form-control" name="series">
+  </div>
+	<div class="mb-3">
+    <label for="issue">Issue</label>
+    <input type="number" class="form-control" name="issue">
+  </div>
+	<div class="mb-3">
+    <label for="genre">Genre</label>
+    <select class="form-control" id="genre" name="genre">
+		<option disabled selected> -- Choose Below --</option>
+		<option>Superhero</option>
+		<option>Manga</option>
+		<option>Slice-of-Life</option>
+		<option>Humor</option>
+		<option>Sci-fi</option>
+		<option>Fantasy</option>
+		<option>Horror</option>
+		<option>Action</option>
+		<option>Nonfiction</option>
+		</select>
+  </div>
+	<div class="mb-3 form-check">
+		 <input type="checkbox" class="form-check-input" name="color">
+    <label for="color">Color?</label>
+   
+  </div>
+	
+  <div class="mb-3">
+    <label for="image">Link to Image</label>
+    <input type="text" class="form-control" name="image" placeholder="https://www.myimage.com" >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+	
+</div>
+
+
+
+<!-- <h1>Add New Comic</h1>
+<form action="/comic" method="POST">
+	<label for="title">Title</label>
+	<input type="text" name="title" autofocus>
+	<label for="description">Description</label>
+	<input type="text" name="description">
+	<label for="image">Image Link</label>
+	<input type="text" name="image">
+	<br />
+	<br />
+	<button type="submit">Submit</button>
+</form> -->
+
+<%- include("partials/footer") %>
