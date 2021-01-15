@@ -15,7 +15,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 //Config Imports
-const config = require('./config');
+try {
+	var config = require('./config');
+} catch (e) {
+	console.log("Could not import config. This probably means you're not working locally.")
+	console.log(e);
+}
+
 
 //Route Import
 const comicRoutes = require('./routes/comics');
@@ -47,7 +53,13 @@ seed();
 // ========================
  
 // Connect to DB
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}); //create index is for search
+try{
+	mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}); //create index is for search
+} catch (e) {
+	console.log("Could not connect using config. This probably means you're working locally.");
+	mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+}
+
 
 // Express Config
 app.set("view engine", "ejs");
@@ -55,7 +67,7 @@ app.use(express.static('public')); //for using the public file CSS
 
 // Express Session Config
 app.use(expressSession({
-	secret: "ak2837eh2837hcch2387ec685t358gc8347nc8c34hr834gr7c634gr98u9h2038y4109sd",
+	secret: process.env.ES_SECRET || config.expressSession.secret,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -98,7 +110,7 @@ app.use(commentRoutes);
 // ========================
 //LISTEN
 // ========================
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
 	console.log("yelp_comic is running...");
 });
 
