@@ -29,10 +29,11 @@
 			  <li><a class="dropdown-item" href="#">Non-Fiction</a></li>
           </ul>
         </li>
+		  <% if (user) { %> 
 		  <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/comic/new">Add Comic</a>
-        </li>
-		   
+       	 </li>
+		  <% } %> 
 		  <% if(user) { %>
 			   <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/logout">Log Out</a>
@@ -45,7 +46,7 @@
 		  <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/signup">Sign up</a>
         </li>
-		  
+		    
 		<%  } %>
 		  
 		 
