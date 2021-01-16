@@ -74,6 +74,26 @@ router.get("/comic/search", async (req, res) => {
 })
 
 
+
+// Genre
+router.get("/comic/genre/:genre", async (req,res) => {
+	// Check if the given genre is valid 
+	const validGenres = ["superhero", "manga", "slice-of-life", "sci-fi", "fantasy", "horror", "action", "nonfiction"];
+	if(validGenres.includes(req.params.genre.toLowerCase())) {
+			// If yes, continue
+			const comic = await Comic.find({genre: req.params.genre}).exec();
+		res.render("comics", {comic});
+	} else {
+			// If no, send an error 
+			res.send("Please enter a valid genre");
+	}
+});
+
+
+
+
+
+
 //SHOW, show means selecting and showing each item in particular 
 router.get("/comic/:id", async (req, res) => { //instead of /comic
 	try {
@@ -119,10 +139,10 @@ router.put("/comic/:id", checkComicOwner, async (req,res) => { // /comic/:id is 
 })
 
 //DELETE
-router.delete("/comic/:id", checkComicOwner, (req, res) => {
+router.delete("/comic/:id", isLoggedIn, checkComicOwner, (req, res) => {
 	try {
-		const comic = Comic.findByIdAndDelete(req.params.id).exec()
-		console.log("Deleted:", deletedComic);
+		const comic = Comic.findByIdAndDelete(req.params.id).exec();
+		//	console.log("Deleted:", deletedComic);
 		res.redirect("/comic");
 	} catch (err) {
 		console.log(err);
@@ -130,9 +150,6 @@ router.delete("/comic/:id", checkComicOwner, (req, res) => {
 	}
 	
 })
-
-
-
 
 
 module.exports = router;
