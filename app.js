@@ -90,9 +90,11 @@ passport.serializeUser(User.serializeUser()); //Encodes data into the session (p
 passport.deserializeUser(User.deserializeUser())//Decodes data from the session (passport-local-mongoose)
 passport.use(new LocalStrategy(User.authenticate()));
 
-//Current User Middleware Config
+//Current User Middleware Config aka STATE CONFIG
 app.use((req, res, next) => {
 	res.locals.user = req.user; //res.local is a value in the response object that's basically an object that we can add key value pairs on 
+	res.locals.errorMessage = req.flash("error");//for sending the flsah msg to all pages 
+	res.locals.successMessage = req.flash("success");
 	next();
 })
 
